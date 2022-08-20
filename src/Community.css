@@ -1,0 +1,68 @@
+.categoryListPicker {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  top: 56px;
+  padding: 12px;
+  position: absolute;
+  z-index: 1;
+  background-color: #f0f0f0;
+  border: 1px solid #bbbbbb;
+  border-radius: 5px;
+  }
+  .categoryListPicker input{
+    padding: 8px 8px;
+    border-radius: 5px;
+    width: 176px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  .categoryTypeDiv{
+    padding: 8px 24px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  .categoryTypeDiv div{
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .categoryTypeDiv p{
+    margin: 0;
+    font-size: 14px;
+    font-style: italic;
+  }
+  .search{
+    display: flex;
+    position: relative;
+  }
+  .suggest{
+    margin-bottom: 20px;
+  }
+  .removeCategory{
+    border-radius: 5px;
+    font-size: 22px;
+  }
+  .notFound{
+    margin: 0;
+    font-size: 22px;
+  }
+  .search input{
+    width: calc(100% - 32px);
+  }
+  .search input.withBack{
+    width: calc(100% - 146px);
+    padding-left: 130px;
+  }
+  .search span{
+    padding: 6px 16px;
+    font-size: 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+  }
+  .search span::before{
+    margin-right: 10px;
+  }

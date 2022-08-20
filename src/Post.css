@@ -1,0 +1,123 @@
+.PostTab{
+    padding: 14px;
+}
+.PostContainer{
+  margin: auto;
+  width: 100%;
+  margin-top: 10px;
+  max-width: 700px;
+}
+.postType{
+  width: 100%;
+  border-bottom: 1px solid;
+  font-size: 28px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+  .divContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 14px;
+  }
+  .divContainer :is(input[type=button] , label) {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    float: left;
+    padding: 8px 26px;
+    border-radius: 5px;
+  }
+  .mediaUrlPostDiv {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .mediaUrlPostDiv iframe{
+    display: none;
+    width: 445px;
+    height: 250px;
+    margin-top: 14px;
+    border-radius: 5px;
+  }
+
+.PostContainer textarea {
+margin-top: 20px;
+}
+
+.youtubeFrameVideo {
+  margin-top: 18px;
+  border-radius: 6px;
+  width: 470px;
+  height: 264px;
+}
+.mediaFileDetails{
+  width: 100%;
+  display: flex;
+  max-height: 200px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 2%;
+  border: 2px solid;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.mediaFileDetails img {
+  max-width: 46%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.mediaFileDetails video{
+  max-width: 40%;
+  height: 100%;
+  border-radius: 5px;
+  outline: none;
+}
+.extraFileDetails{
+  width: 46%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mediaFileName{
+  font-size: 18px;
+  max-width: 400px;
+  margin : 0
+}
+.mediaFileProgress{
+  font-size: 18px;
+}
+.horizontalDeails{
+  width: 100%;
+  flex-direction: row;
+  height: auto;
+  justify-content: space-between;
+}
+.postDiv{
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  width: 100%;
+  justify-content: space-between;
+}
+.postDiv div{
+  display: flex;
+  font-size: 22px;
+  align-items: center;
+  gap: 14px;
+  background-color: #f0f0f0;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}

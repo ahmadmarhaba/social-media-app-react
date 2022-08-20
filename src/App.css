@@ -1,0 +1,47 @@
+.auth{
+  width: 100%;
+  margin: auto;
+  max-width: 26em;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.auth-div{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.auth-div input{
+  width: 49%;
+  border:none !important;
+  background-color: transparent;
+}
+.auth-form{
+  display: flex;
+  flex-direction: column;
+}
+.auth-div input:hover{
+background-color: #f0f0f0;
+}
+.auth :is(input[type=button] , input[type=submit]){
+cursor: pointer;
+}
+.auth input{
+  font-size: 18px;
+    padding: 12px 16px;
+    border-radius: 5px;
+    border: 2px solid #f0f0f0;
+    margin-bottom: 16px;
+}
+.auth-error{
+  margin-bottom: 16px;
+  color: red;
+  font-size: 18px;
+  text-align: center;
+}
+.selectedButton{
+  background-color: #0b8dff !important;
+  color: white;
+}
