@@ -43,20 +43,21 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
            </>
         }
         {
-          showUserBoxTools && !textBeingEdited ? <div className={`secondLayer userBoxToolContainer`}>
+          showUserBoxTools && !textBeingEdited ? <div className={`baseLayer userBoxToolContainer`}>
             {
              sameUser ?
                 <>
-                  <input type="button" value="Edit" className={`editContent`}
+                  <input type="button" value="Edit" className={`editContent secondLayer`}
                     onClick={() => { SetTextBeingEdited(true); SetShowUserBoxTools(false);}}
                   />
-                  <input type="button" value="Delete" className={`deleteContent`}
+                  <input type="button" value="Delete" className={`deleteContent secondLayer`}
                     onClick={() => {
+                      SetShowUserBoxTools(false);
                       deleteContent({contentID });
                     }}
                   />
                 </>
-                : <input type="button" value="Report" className={`reportContent`} />
+                : <input type="button" value="Report" className={`reportContent secondLayer`} />
             }
           </div> : null
         }
@@ -87,10 +88,10 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
           {!textBeingEdited?
           <div className={`userProfileText`}>
               {
-                postText.trim().length > 0 ? 
+                postText.length > 0 ? 
                 <>
-                  <span className={`shortTextContent`}>{postText.trim().substr(0, 350)}</span>
-                  {!showMoreText && postText >= 350 ? <>
+                  <span className={`shortTextContent`}>{postText.substr(0, 350)}</span>
+                  {!showMoreText && postText.length >= 350 ? <>
                     <div className="showMoreDots">... </div>
                     <input type="button" className={`readMoreButton`} value="Read More"
                       onClick={() => { SetShowMoreText(true) }}
@@ -98,7 +99,7 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
                   </>
                     : null
                   }
-                  {showMoreText ? <span className={`readMoreContent`}>{postText.trim().substr(350, postText.trim().length)} </span> : null}
+                  {showMoreText ? <span className={`readMoreContent`}>{postText.substr(350, postText.length)} </span> : null}
                 </>
                   : <span className={`shortTextContent`}>{postText}</span> 
               }

@@ -5,8 +5,8 @@ import './App.css';
 import Loader from "./components/loader"
 import Welcome from "./welcome"
 import PropTypes from 'prop-types'
-// import { fetchUser } from "./store/actions/userAction"
-import { useSelector } from "react-redux"
+import { fetchUser } from "./store/actions/userAction"
+import { useDispatch, useSelector } from "react-redux"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 App.contextTypes = {
@@ -14,34 +14,34 @@ App.contextTypes = {
 }
 function App() {
   const [currentTab, setCurrentTab] = useState(false)
-  // const dispatch : any = useDispatch();
+  const dispatch : any = useDispatch();
   let { user } = useSelector((state: any) => state.user)
   
-  // const verifyUser = useCallback(() => {
-  //   fetch(process.env.REACT_APP_API_ENDPOINT + "users/refreshToken", {
-  //     method: "POST",
-  //     credentials: "include",
-  //     headers: { "Content-Type": "application/json" },
-  //   }).then(async response => {
-  //     if (response.ok) {
-  //       const data = await response.json()
-  //       const dataD = { ...user , token: data.token }
-  //       dispatch(fetchUser(dataD))
-  //     } 
-  //     else if(user.token == null){    
-  //         const dataD = { ...user , token: null }
-  //         dispatch(fetchUser(dataD))
-  //     }
-  //     // call refreshToken every 5 minutes to renew the authentication token.
-  //     setTimeout(verifyUser, 5 * 60 * 1000)
-  //   }).catch(error => {
-  //     console.error(error)
-  //   })
-  // }, [dispatch , user])
+  const verifyUser = useCallback(() => {
+    fetch(process.env.REACT_APP_API_ENDPOINT + "users/refreshToken", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+    }).then(async response => {
+      console.log(response.ok)
+      if (response.ok) {
+        const data = await response.json()
+        const dataD = { ...user , token: data.token }
+        console.log(dataD)
+        dispatch(fetchUser(dataD))
+      } 
+      else{    
+          const dataD = { ...user , token: null }
+          dispatch(fetchUser(dataD))
+      }
+      // call refreshToken every 5 minutes to renew the authentication token.
+      setTimeout(verifyUser, 5 * 60 * 1000)
+    })
+  }, [dispatch])
 
-  // useEffect(() => {
-  //   verifyUser()
-  // }, [verifyUser])
+  useEffect(() => {
+    verifyUser()
+  }, [verifyUser])
 
   /**
    * Sync logout across tabs
@@ -60,7 +60,7 @@ function App() {
     }
   }, [syncLogout])
 
-  return user.token == null ? (
+  return user.token === null ? (
     <div className="auth">
       <div className="auth-div">
         <input type="button" value="Login" onClick={() => { setCurrentTab(false) }} className={!currentTab ? "selectedButton" : ""}/>

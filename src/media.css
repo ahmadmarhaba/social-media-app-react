@@ -9,14 +9,6 @@
     row-gap: 14px;
 }
 
-input[type=text] , textarea{
-    font-size: 18px;
-    padding: 10px 12px;
-    border-radius: 5px;
-    border: 2px solid #f0f0f0;
-    background-color: transparent;
-    resize: vertical;
-}
 .social{
     display: flex;
     flex-direction: row;
@@ -30,7 +22,6 @@ input[type=text] , textarea{
     font-size: 22px;
     align-items: center;
     gap: 14px;
-    background-color: #f0f0f0;
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
@@ -40,21 +31,13 @@ input[type=text] , textarea{
 .nav input{
     width: 49%;
 }
-input[type=button]{
-    font-size: 18px;
-    padding: 12px 16px;
-    border: 1px solid transparent;
-    background-color: transparent;
-    cursor: pointer;
-    border-radius: 5px;
-}
+
 .details{
     display: flex;
     font-size: 22px;
     align-items: center;
     overflow-wrap: anywhere;
     gap: 14px;
-    background-color: #f0f0f0;
     padding: 0 12px;
     border-radius: 5px;
     cursor: pointer;
@@ -63,13 +46,12 @@ input[type=button]{
 .moreDetails{
     position: absolute;
     right: 0;
-    top: 52px;
-    background-color: #f0f0f0;
     z-index: 1;
     padding: 6px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    top: 52px;
     border: 1px solid #00000024;
 }
 .moreDetails div{
@@ -81,9 +63,6 @@ input[type=button]{
     cursor: pointer;
     -webkit-user-select: none;
     user-select: none;
-}
-.moreDetails div:hover , .details:hover{
-    background-color: #dbdbdb;
 }
 .mainTitle{
     display: flex;

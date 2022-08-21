@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 // import {InsertYoutubeUrl , checkAcceptedExtensions} from './PostData';
 // import axios from 'axios';
 
-export default function CreateContent({  sort , SetSort, insidePost , commentParentID  , SetViewUserPosts} : any){
+export default function CreateContent({  sort , SetSort, insidePost , commentParentID  , SetViewUserPosts , showCreateContent, SetShowCreateContent} : any){
     // let [mediaUrl , SetMediaUrl] = useState(false)
     // let [mediaUploaded , SetMediaUploaded] = useState([])
 
@@ -16,8 +16,6 @@ export default function CreateContent({  sort , SetSort, insidePost , commentPar
 
     let { user } = useSelector((state: any) => state.user)
     // let [uploadURL , SetUploadURL] = useState<string>(null)
-
-    const [showCreateContent, SetShowCreateContent] = useState(false)
     
     const ContentTitleRef = useRef<any>([])
     const ContentTextRef = useRef<any>([])
@@ -36,8 +34,8 @@ export default function CreateContent({  sort , SetSort, insidePost , commentPar
         if (response.ok) {
           const data = await response.json()  
           if(data.success){
-            console.log(data);
-            !insidePost && !commentParentID && SetViewUserPosts(user.details.name)
+            // console.log(data);
+            // !insidePost && !commentParentID && SetViewUserPosts(user.details.name)
             // SetPage(commentCurrentPage);
             // postPrevListRef.current = postPrevListRef.current ? [data.post , ...postPrevListRef.current] : data.post;
             // SetPosts(postPrevListRef.current);
@@ -156,7 +154,7 @@ export default function CreateContent({  sort , SetSort, insidePost , commentPar
                 </div>
                 : 
                 <div className='postDiv'>
-                  <div className="" onClick={()=>{ SetSort(!sort) }}>
+                  <div className="secondLayer" onClick={()=>{ SetSort(!sort) }}>
                     <span className={`bi bi-sort-${sort ? 'down' : "up"}`} ></span>
                     <span>{`Sort by date`}</span>
                   </div>

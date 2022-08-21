@@ -124,7 +124,6 @@
       top: 11px;
       padding: 6px;
       border-radius: 5px;
-      background-color: #e3e3e3;
     }
    
     .userBoxToolContainer input {
@@ -172,7 +171,6 @@
     .readMoreButton {
       cursor: pointer;
       display: inline;
-      background-color: transparent;
       padding: 0;
       margin: 0;
       color: #ff3232;
@@ -200,9 +198,7 @@
       display: flex;
       justify-content: space-evenly;
     }
-    .secondLayer{
-      background-color: #f0f0f0 !important;
-    }
+
     .userBoxOptions input:last-child{
       margin-right: 0;
     }
@@ -222,7 +218,6 @@
       text-align: center;
     }
    .saveContent{
-    background-color: #4084ff !important;
     color: white;
    }
     .confirmationDiv input {
@@ -271,17 +266,9 @@
       font-size: 18px;
       border-radius: 5px;
       cursor: pointer;
-      background-color: #f0f0f0;
     }
     .subNav span::before{
       margin-right: 10px;
-    }
-    .selectedButton{
-      background-color: #0087ff !important;
-    color: white;
-    }
-    .createComment{
-      background-color: #f0f0f0 !important;
     }
     .createCommentContainer{
       display: flex;
@@ -291,7 +278,4 @@
     .editTitle{
       width: 96%;
     margin-top: 14px;
-    }
-    .userBoxToolContainer input:hover , .userBoxTools:hover{
-      background-color: #dbdbdb !important;
     }

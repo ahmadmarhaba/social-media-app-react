@@ -16,7 +16,7 @@ const Welcome = () => {
   let [commentParentID, SetCommentParentID] = useState<any>(null);
   let [backFromComments, SetBackFromComments] = useState<any>(false);
   let [sort , SetSort] = useState(true);
-
+  const [showCreateContent, SetShowCreateContent] = useState(false)
 
   const fetchUserDetails = useCallback(() => {
     fetch(process.env.REACT_APP_API_ENDPOINT + "users/me", {
@@ -80,56 +80,71 @@ const Welcome = () => {
   ) : !user.details ? (
     <Loader />
   ) : (
-    <>
-            <div className="social">
+    <>      {
+      !showCreateContent && 
+      <div className="social">
             {
               insidePost ? <>
-                <div className="back" onClick={ () => {
+                <div className="back secondLayer" onClick={ () => {
                   SetBackFromComments(true);
                 }}>
-                  <span className="bi bi-arrow-left"></span>
+                    <span className="bi bi-arrow-left"></span>
                     <span className="">Back</span>
                   </div> 
                   <div className="mainTitle">Comments</div>
                 </> : <>
                 <Search viewUserPosts={viewUserPosts} SetViewUserPosts={SetViewUserPosts}  SetBackFromComments={SetBackFromComments}/>
                 <div className="mainTitle">
-                  {viewUserPosts ? viewUserPosts : `Posts Feed`}
+                  {viewUserPosts ? viewUserPosts : `Followed Feed`}
                 </div>
               </>
             }
-                <div className="details" onClick={()=>{ SetShowMore(!showMore) }}>
+                <div className="details secondLayer" onClick={()=>{ SetShowMore(!showMore) }}>
                   <span>{user.details.name}</span>
                   <span className={`bi bi-chevron-${ showMore ? "up" : "down"}`} ></span>
                 </div>
                 {
-                  showMore && <div className="moreDetails">
-                  <div onClick={() => { 
+                  showMore && <div className="moreDetails baseLayer">
+                  <div className="secondLayer" onClick={() => { 
                     SetShowMore(false)
+                    SetCommentParentID(null)
                     SetViewUserPosts(user.details.name);
                   }}>
                     <span className="bi bi-list-nested"></span>
                     <span className="">My Posts</span>
                   </div>
-                  <div className="logout" onClick={logoutHandler}>
+                  <div className="secondLayer" onClick={logoutHandler}>
                     <span className="bi bi-box-arrow-right"></span>
                     <span className="">Sign Out</span>
                   </div>
                 </div> 
                 }
             </div>
-          <CreateContent insidePost={insidePost} commentParentID={commentParentID} SetViewUserPosts={SetViewUserPosts} sort={sort} SetSort={SetSort}/>
-          <Content
-          sort={sort}
+    }
+            
+          <CreateContent 
+          insidePost={insidePost} 
+          commentParentID={commentParentID} 
+          SetViewUserPosts={SetViewUserPosts} 
+          sort={sort} 
           SetSort={SetSort}
-          insidePost={insidePost}
-          SetInsidePost={SetInsidePost}
-          viewUserPosts={viewUserPosts}
-          commentParentID={commentParentID}
-           SetCommentParentID={SetCommentParentID}
-           SetBackFromComments={SetBackFromComments}
-           backFromComments={backFromComments}
+          showCreateContent={showCreateContent}
+           SetShowCreateContent={SetShowCreateContent}
           />
+          {
+            !showCreateContent && 
+                  <Content
+                  sort={sort}
+                  SetSort={SetSort}
+                  insidePost={insidePost}
+                  SetInsidePost={SetInsidePost}
+                  viewUserPosts={viewUserPosts}
+                  commentParentID={commentParentID}
+                  SetCommentParentID={SetCommentParentID}
+                  SetBackFromComments={SetBackFromComments}
+                  backFromComments={backFromComments}
+                  />
+          }
     </>
   )
 }

@@ -2,12 +2,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  top: 56px;
-  padding: 12px;
+  padding: 6px;
   position: absolute;
   z-index: 1;
-  background-color: #f0f0f0;
-  border: 1px solid #bbbbbb;
+  top: 52px;
+  border: 1px solid #00000024;
   border-radius: 5px;
   }
   .categoryListPicker input{
@@ -22,17 +21,8 @@
   .categoryTypeDiv{
     padding: 8px 24px;
     border-radius: 5px;
-    margin-bottom: 20px;
     cursor: pointer;
-  }
-  .categoryTypeDiv div{
     font-size: 20px;
-    margin-bottom: 10px;
-  }
-  .categoryTypeDiv p{
-    margin: 0;
-    font-size: 14px;
-    font-style: italic;
   }
   .search{
     display: flex;
@@ -49,19 +39,14 @@
     margin: 0;
     font-size: 22px;
   }
-  .search input{
-    width: calc(100% - 32px);
-  }
-  .search input.withBack{
-    width: calc(100% - 146px);
-    padding-left: 130px;
+  .search {
+    border-radius: 5px;
   }
   .search span{
     padding: 6px 16px;
     font-size: 22px;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #f0f0f0;
   }
   .search span::before{
     margin-right: 10px;

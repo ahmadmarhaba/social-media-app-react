@@ -11,7 +11,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
     let [WaitingForPost,SetWaitingForPost] = useState(true)
 
     let [PostsView, SetPosts] = useState<any>([]);
-    const postPrevListRef = useRef<any>([])
+    const postPrevListRef = useRef<any>(PostsView)
     // const [CurrentPostViewing, SetCurrentPostViewing] = useState(null)
 
     let [page , SetPage]  = useState(1);
@@ -50,10 +50,10 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
       }).then(async response => {
         if (response.ok) {
           const data = await response.json();
-          if(data.success){    
-            SetPage(page + 5)
-            postPrevListRef.current = postPrevListRef.current ? [...data.posts , ...postPrevListRef.current] : data.posts;
+          if(data.success){ 
+            postPrevListRef.current = postPrevListRef.current && PostsView.length > 0 ? [...data.posts , ...postPrevListRef.current] : data.posts;
             SetPosts(postPrevListRef.current);
+            SetPage(page + 5)
             SetJustScrolledToBottomPost(false)
           }
           SetCommentParentID(parentID)
@@ -88,11 +88,13 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
               content.agreeAmount = data.postAgree;
               content.disAgreeAmount = data.postDisagree;
               SetPosts((oldArray : any) => {
-                return [
+                let temp = [
                   ...oldArray.slice(0, contentIndex),
                   content,
                   ...oldArray.slice(contentIndex + 1),
                 ]
+                postPrevListRef.current = temp
+                return temp;
               })
           }
         }
@@ -119,11 +121,13 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
             content.Post_Text = text;
             content.Post_Title = title;
             SetPosts((oldArray : any) => {
-              return [
+              let temp = [
                 ...oldArray.slice(0, contentIndex),
                 content,
                 ...oldArray.slice(contentIndex + 1),
               ]
+              postPrevListRef.current = temp
+              return temp;
             })
           }
         }
@@ -143,14 +147,17 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
         if (response.ok) {
           const data = await response.json()  
           if(data.success){
+            console.log(data , contentID)
             let content : any = postPrevListRef.current.find((cont : any) => cont._id == contentID)
             const contentIndex = postPrevListRef.current.indexOf(content)
             if(contentIndex < 0) return;
             SetPosts((oldArray : any) => {
-              return [
-                ...oldArray.slice(0, contentIndex),
-                ...oldArray.slice(contentIndex + 1),
-              ]
+              delete oldArray[contentIndex];
+              const filtered = oldArray.filter((post : any) => {
+                return post !== undefined;
+              });
+              postPrevListRef.current = filtered;
+              return filtered;
             })
           }
         }
@@ -183,8 +190,8 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
                 return <PostForm key={data._id} parentID={data.Parent_ID} contentID={data._id} prof={data.prof} title={data.Post_Title} mediaFolder={data.Post_MediaFolder} mediaFiles={data.Post_MediaFiles} mediaUrl={data.Post_MediaUrl} postText={data.Post_Text} userID={data.User_ID} sameUser={data.sameUser} postDate={data.Post_Date} commentsCount={data.commentsCount} postAgree={data.agreeAmount} postDisagree={data.disAgreeAmount} userInteracted={data.userInteracted} postViews={0} getContent={getContent} setUserOpinion={setUserOpinion} editContent={editContent} deleteContent={deleteContent} viewUserPosts={viewUserPosts}/>
               })
               : PostsView && PostsView.length === 0 ?
-              <div className={`secondLayer loadingContent`}>{insidePost ? `No comments yet` : viewUserPosts ? `${viewUserPosts} doesn't have any posts yet` :`Follow people to have posts appear`}</div> 
-              : PostsView == null && <div className={`secondLayer loadingContent`}>{`Loading...`}</div>
+              <div className={`baseLayer loadingContent`}>{insidePost ? `No comments yet` : viewUserPosts ? `${viewUserPosts} doesn't have any posts yet` :`Follow people to have posts appear`}</div> 
+              : PostsView == null && <div className={`baseLayer loadingContent`}>{`Loading...`}</div>
             }       
         </div>
     </>
