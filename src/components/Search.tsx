@@ -8,18 +8,8 @@ const Search = ({viewUserPosts,SetViewUserPosts , SetBackFromComments} : any)=>{
     let { user } = useSelector((state: any) => state.user)
     
     useEffect(()=>{
-        // socket.on('getCategoryList',(data)=>{
-        //     if(!data) return;
-        //     let catlist = data.categoryList ? JSON.parse(data.categoryList) : null
-        //     let catlistSugg = data.categorySuggestionList ? JSON.parse(data.categorySuggestionList) : null
-        //     SetCategoryList(catlist)
-        //     SetCategoryListSuggestion(catlistSugg)
-        // })
-        // socket.on('getCategoryName',(data)=>{
-        //     if(!data) return;
-        //     SetCurrentCategoryName(data.categoryName)
-        // })
-    },[])
+        SetCategorySearch('');
+    },[viewUserPosts])
     
     const handleSearch = (e : any) => {
         e.preventDefault();
@@ -66,7 +56,7 @@ const Search = ({viewUserPosts,SetViewUserPosts , SetBackFromComments} : any)=>{
                         <div key={index} className={`categoryTypeDiv secondLayer`}
                         onClick={ (e) =>{
                             e.preventDefault();
-                            SetCategorySearch('')
+                            
                             SetViewUserPosts(user)
                         }}>
                             <div>{user}</div>
