@@ -1,4 +1,4 @@
 This is social media app client made with reactjs, passportjs, and redux
 
-scroll to add more posts
+Tasks
 view only posts for followed people

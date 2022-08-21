@@ -23,11 +23,9 @@ function App() {
       credentials: "include",
       headers: { "Content-Type": "application/json" },
     }).then(async response => {
-      console.log(response.ok)
       if (response.ok) {
         const data = await response.json()
         const dataD = { ...user , token: data.token }
-        console.log(dataD)
         dispatch(fetchUser(dataD))
       } 
       else{    

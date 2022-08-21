@@ -160,7 +160,7 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
               !parentID &&
               <input type="button" value={`${commentsCount} Comments`} className={`secondLayer`}
               onClick={() =>  {
-                getContent({username : null , parentID : contentID})
+                getContent({username : null , parentID : contentID, indexPage:0})
               }}
               />
             }

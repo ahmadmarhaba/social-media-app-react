@@ -6,37 +6,36 @@ import { useSelector } from "react-redux"
 
 const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,backFromComments ,SetBackFromComments, commentParentID ,SetCommentParentID} :any) =>{
 
-    let [JustScrolledToBottomPost , SetJustScrolledToBottomPost] = useState(false)
-
-    let [WaitingForPost,SetWaitingForPost] = useState(true)
-
     let [PostsView, SetPosts] = useState<any>([]);
     const postPrevListRef = useRef<any>(PostsView)
     // const [CurrentPostViewing, SetCurrentPostViewing] = useState(null)
 
-    let [page , SetPage]  = useState(1);
+    let [page , SetPage]  = useState(0);
 
     let { user } = useSelector((state: any) => state.user)
 
     useEffect(()=>{
-        getContent({username : viewUserPosts , parentID : commentParentID})
+        getContent({username : viewUserPosts , parentID : commentParentID, indexPage:0})
     },[sort])
     useEffect(()=>{
       if(viewUserPosts){
-        getContent({username : viewUserPosts , parentID : commentParentID})
+        getContent({username : viewUserPosts , parentID : commentParentID, indexPage:0})
       }
     },[viewUserPosts])
     useEffect(()=>{
       if(backFromComments){
         SetBackFromComments(false)
-        getContent({username : viewUserPosts , parentID : null})
+        getContent({username : viewUserPosts , parentID : null , indexPage:0})
       }
     },[backFromComments])
 
 
-    function getContent({username , parentID} : any ){
-      postPrevListRef.current = null;
-      SetPosts(null)
+    function getContent({username , parentID, indexPage} : any ){
+      if(indexPage === 0){
+        postPrevListRef.current = null;
+        SetPage(0)
+        SetPosts(null)
+      }
       parentID ? SetInsidePost(true) : SetInsidePost(false);
       fetch(process.env.REACT_APP_API_ENDPOINT + "posts/fetch", {
         method: "POST",
@@ -46,15 +45,16 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
-        body: JSON.stringify({ username , parentID , sort })
+        body: JSON.stringify({ username , parentID , sort ,page  : indexPage})
       }).then(async response => {
         if (response.ok) {
           const data = await response.json();
           if(data.success){ 
-            postPrevListRef.current = postPrevListRef.current && PostsView.length > 0 ? [...data.posts , ...postPrevListRef.current] : data.posts;
+            console.log(data.posts)
+            postPrevListRef.current = postPrevListRef.current && PostsView.length > 0 ? [...postPrevListRef.current , ...data.posts] : data.posts;
             SetPosts(postPrevListRef.current);
-            SetPage(page + 5)
-            SetJustScrolledToBottomPost(false)
+            SetPage(indexPage + 6)
+
           }
           SetCommentParentID(parentID)
         }
@@ -167,19 +167,11 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
 
     const handleContentScroll = (e :any) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    
+       
         if(!bottom) return;
-        
-        if(!WaitingForPost && !JustScrolledToBottomPost) {
-          SetWaitingForPost(true);
-          SetJustScrolledToBottomPost(true)
-            // socket.emit('getTopPosts',{
-            //   categoryID : currentCategoryID,
-            //   name : CurrentProfile ? CurrentProfile.name : null,
-            //   code : CurrentProfile ? CurrentProfile.code : null,
-            //   page : postCurrentPage
-            // })
-        }
+       
+        console.log(bottom , page)
+        getContent({username : viewUserPosts , parentID : commentParentID, indexPage : page})
       }
 
 
