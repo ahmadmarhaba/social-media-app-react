@@ -57,10 +57,13 @@
       cursor: pointer;
     }
     .userProfileTitle {
-      width: 90%;
+      width: 100%;
       float: left;
       font-size: 26px;
       margin-top: 6px;
+    }
+    .userProfileTitle span{
+      font-size: 16px;
     }
     .userProfilePic {
       height: 42px;

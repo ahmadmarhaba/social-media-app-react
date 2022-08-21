@@ -1,11 +1,12 @@
 #root{
-    width: 100%;
+    width: calc(100% - 28px);
     margin: auto;
     max-width: 46em;
     height: calc(100vh - 14px);
     display: flex;
     flex-direction: column;
-    padding-top: 14px;
+    padding: 14px;
+    padding-bottom: 0;
     row-gap: 14px;
 }
 
@@ -68,4 +69,5 @@
     display: flex;
     align-items: center;
     font-size: 22px;
+    margin-left: 14px;
 }

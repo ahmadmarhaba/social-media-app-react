@@ -101,7 +101,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
       })
     }
 
-    function editContent({contentID , title , text} : any){
+    function editContent({contentID  , text} : any){
       fetch(process.env.REACT_APP_API_ENDPOINT + "posts/edit", {
         method: "POST",
         credentials: "include",
@@ -110,7 +110,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
-        body: JSON.stringify({contentID , title , text})
+        body: JSON.stringify({contentID  , text})
       }).then(async response => {
         if (response.ok) {
           const data = await response.json()  
@@ -119,7 +119,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
             const contentIndex = postPrevListRef.current.indexOf(content)
             if(contentIndex < 0) return;
             content.Post_Text = text;
-            content.Post_Title = title;
+            content.Post_Edited = true;
             SetPosts((oldArray : any) => {
               let temp = [
                 ...oldArray.slice(0, contentIndex),
@@ -187,7 +187,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
             <div className={`contentContainer`} onScroll={handleContentScroll}>
             {PostsView != null && PostsView.length > 0 ?
               PostsView.map((data : any) => {
-                return <PostForm key={data._id} parentID={data.Parent_ID} contentID={data._id} prof={data.prof} title={data.Post_Title} mediaFolder={data.Post_MediaFolder} mediaFiles={data.Post_MediaFiles} mediaUrl={data.Post_MediaUrl} postText={data.Post_Text} userID={data.User_ID} sameUser={data.sameUser} postDate={data.Post_Date} commentsCount={data.commentsCount} postAgree={data.agreeAmount} postDisagree={data.disAgreeAmount} userInteracted={data.userInteracted} postViews={0} getContent={getContent} setUserOpinion={setUserOpinion} editContent={editContent} deleteContent={deleteContent} viewUserPosts={viewUserPosts}/>
+                return <PostForm key={data._id} parentID={data.Parent_ID} contentID={data._id} prof={data.prof} title={data.Post_Title} mediaFolder={data.Post_MediaFolder} mediaFiles={data.Post_MediaFiles} mediaUrl={data.Post_MediaUrl} postText={data.Post_Text} sameUser={data.sameUser} postDate={data.Post_Date} commentsCount={data.commentsCount} postAgree={data.agreeAmount} postDisagree={data.disAgreeAmount} userInteracted={data.userInteracted} postViews={0} postEdited={data.Post_Edited} getContent={getContent} setUserOpinion={setUserOpinion} editContent={editContent} deleteContent={deleteContent} />
               })
               : PostsView && PostsView.length === 0 ?
               <div className={`baseLayer loadingContent`}>{insidePost ? `No comments yet` : viewUserPosts ? `${viewUserPosts} doesn't have any posts yet` :`Follow people to have posts appear`}</div> 

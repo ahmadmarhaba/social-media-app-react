@@ -49,7 +49,6 @@ const Welcome = () => {
   useEffect(() => {
     // fetch only when user details are not present
     if (!user.details) {
-      console.log(user)
       fetchUserDetails()
     }
   }, [user.details, fetchUserDetails])
@@ -89,14 +88,10 @@ const Welcome = () => {
                   SetBackFromComments(true);
                 }}>
                     <span className="bi bi-arrow-left"></span>
-                    <span className="">Back</span>
+                    <span className="">Back to Posts</span>
                   </div> 
-                  <div className="mainTitle">Comments</div>
                 </> : <>
                 <Search viewUserPosts={viewUserPosts} SetViewUserPosts={SetViewUserPosts}  SetBackFromComments={SetBackFromComments}/>
-                <div className="mainTitle">
-                  {viewUserPosts ? viewUserPosts : `Followed Feed`}
-                </div>
               </>
             }
                 <div className="details secondLayer" onClick={()=>{ SetShowMore(!showMore) }}>

@@ -47,10 +47,13 @@ const Search = ({viewUserPosts,SetViewUserPosts , SetBackFromComments} : any)=>{
         })
       }
     return (
-        <div className={`search secondLayer`}>
+        <div className={`search`}>
             {
                 viewUserPosts ? <>
-                    <span className={`bi bi-arrow-left`} onClick={()=>{ SetViewUserPosts(null);SetBackFromComments(true) }}>Back</span> 
+                    <span className={`bi bi-arrow-left secondLayer`} onClick={()=>{ SetViewUserPosts(null);SetBackFromComments(true) }}>Back</span> 
+                 <div className="mainTitle">
+                  {viewUserPosts ? viewUserPosts : `Followed Feed`}
+                </div>
                 </> 
                 : <input type="text" placeholder="Search for user..." maxLength={150} onChange={handleSearch} autoComplete="off"/>
             }     

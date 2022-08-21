@@ -3,13 +3,12 @@ import moment from "moment";
 import '../Content.css'
 
 
-const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, mediaUrl, postText, userID, sameUser, postDate, commentsCount, postAgree, postDisagree, userInteracted, postViews , getContent , setUserOpinion , editContent , deleteContent , viewUserPosts , SetViewUserPosts} : any)=> {
+const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, mediaUrl, postText, sameUser, postDate, commentsCount, postAgree, postDisagree, userInteracted, postViews, postEdited , getContent , setUserOpinion , editContent , deleteContent} : any)=> {
   
     let [textBeingEdited,SetTextBeingEdited] = useState(false);
     let [showMoreText,SetShowMoreText] = useState(false);
     let [showUserBoxTools,SetShowUserBoxTools] = useState(false);
     let EditedTextRef = useRef(null);
-    let EditedTitleRef = useRef(null);
     mediaFiles = mediaFiles.split(",")
 
     return (
@@ -36,11 +35,10 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
         </div>
         {
           title != null && title != '' && !parentID &&
-           <>
-             {
-              !textBeingEdited ? <div className={`userProfileTitle`}>{title}</div> : <input className='editTitle' type="text" defaultValue={title} ref={EditedTitleRef} />
-             }
-           </>
+             <div className={`userProfileTitle`}>
+              {title}
+             <span> {postEdited ? '(Edited)' : ''}</span>
+             </div>
         }
         {
           showUserBoxTools && !textBeingEdited ? <div className={`baseLayer userBoxToolContainer`}>
@@ -116,10 +114,9 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
             />
             <input type="button" value="Save" className={`saveContent selectedButton`}
               onClick={() => {
-                const title = (EditedTitleRef.current as any).value;
                 const text = (EditedTextRef.current as any).value;
                 SetTextBeingEdited(false)
-                editContent({contentID , title , text})
+                editContent({contentID , text})
               }}
             />
           </div> : null
