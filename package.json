@@ -1,7 +1,8 @@
 {
-  "name": "media-app-react",
+  "name": "social-media-app-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ahmadmarhaba.github.io/social-media-app-react",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
@@ -12,6 +13,7 @@
     "@types/react-dom": "^18.0.6",
     "axios": "^0.27.2",
     "bootstrap-icons": "^1.9.1",
+    "gh-pages": "^4.0.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,7 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
