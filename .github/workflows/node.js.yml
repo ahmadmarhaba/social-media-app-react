@@ -28,7 +28,7 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-    - run: npm ci
+      run: npm ci
 
     - name: Run the tests and generate coverage report
       run: npm test -- --coverage
