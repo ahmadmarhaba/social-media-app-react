@@ -8,14 +8,13 @@ import PropTypes from 'prop-types'
 import { fetchUser } from "./store/actions/userAction"
 import { useDispatch, useSelector } from "react-redux"
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { AnyAction, Dispatch } from "redux";
 
 App.contextTypes = {
   test: PropTypes.string
 }
 function App() {
   const [currentTab, setCurrentTab] = useState(false)
-  const dispatch : Dispatch<any> = useDispatch() as any;
+  const dispatch : any = useDispatch();
   let { user } = useSelector((state: any) => state.user)
   
   const verifyUser = useCallback(() => {
