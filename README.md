@@ -1,4 +1,3 @@
-This is social media app client made with reactjs, passportjs, and redux
+This is social media app client made with reactjs, passportjs auth, and redux
 
-Tasks
-view only posts for followed people
+![CI/CD](https://github.com/dyarleniber/react-workflow-gh-actions/workflows/CI/CD/badge.svg)
