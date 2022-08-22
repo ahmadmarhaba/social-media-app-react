@@ -17,6 +17,7 @@ const Welcome = () => {
   let [backFromComments, SetBackFromComments] = useState<any>(false);
   let [sort , SetSort] = useState(true);
   const [showCreateContent, SetShowCreateContent] = useState(false)
+  const [followed,SetFollowed] = useState(false)
 
   const fetchUserDetails = useCallback(() => {
     fetch(process.env.REACT_APP_API_ENDPOINT + "users/me", {
@@ -91,7 +92,13 @@ const Welcome = () => {
                     <span className="">Back to Posts</span>
                   </div> 
                 </> : <>
-                <Search viewUserPosts={viewUserPosts} SetViewUserPosts={SetViewUserPosts}  SetBackFromComments={SetBackFromComments}/>
+                <Search 
+                viewUserPosts={viewUserPosts}
+                SetViewUserPosts={SetViewUserPosts}
+                SetBackFromComments={SetBackFromComments}
+                followed={followed}
+                SetFollowed={SetFollowed}
+                />
               </>
             }
                 <div className="details secondLayer" onClick={()=>{ SetShowMore(!showMore) }}>
@@ -134,10 +141,13 @@ const Welcome = () => {
                   insidePost={insidePost}
                   SetInsidePost={SetInsidePost}
                   viewUserPosts={viewUserPosts}
+                  SetViewUserPosts={SetViewUserPosts}
                   commentParentID={commentParentID}
                   SetCommentParentID={SetCommentParentID}
                   SetBackFromComments={SetBackFromComments}
                   backFromComments={backFromComments}
+                  followed={followed}
+                  SetFollowed={SetFollowed}
                   />
           }
     </>

@@ -3,7 +3,7 @@ import moment from "moment";
 import '../Content.css'
 
 
-const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, mediaUrl, postText, sameUser, postDate, commentsCount, postAgree, postDisagree, userInteracted, postViews, postEdited , getContent , setUserOpinion , editContent , deleteContent} : any)=> {
+const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, mediaUrl, postText, sameUser, postDate, commentsCount, postAgree, postDisagree, userInteracted, postViews, postEdited , getContent , setUserOpinion , editContent , deleteContent , SetViewUserPosts} : any)=> {
   
     let [textBeingEdited,SetTextBeingEdited] = useState(false);
     let [showMoreText,SetShowMoreText] = useState(false);
@@ -30,7 +30,7 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
               // })
             }}
         >
-          <span className={`userProfileName`}>{prof.name}</span>
+          <span onClick={()=> {SetViewUserPosts(prof.name)}} className={`userProfileName`}>{prof.name}</span>
           <div className={`userDateTime`}>{moment(new Date(Number(postDate))).local().format('MMMM Do YYYY, hh:mm a')}</div>
         </div>
         {
@@ -45,17 +45,19 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
             {
              sameUser ?
                 <>
-                  <input type="button" value="Edit" className={`editContent secondLayer`}
+                  <input type="button" value="Edit" className={`secondLayer`}
                     onClick={() => { SetTextBeingEdited(true); SetShowUserBoxTools(false);}}
                   />
-                  <input type="button" value="Delete" className={`deleteContent secondLayer`}
+                  <input type="button" value="Delete" className={`secondLayer`}
                     onClick={() => {
                       SetShowUserBoxTools(false);
                       deleteContent({contentID });
                     }}
                   />
                 </>
-                : <input type="button" value="Report" className={`reportContent secondLayer`} />
+                : <input type="button" value="Report" className={`secondLayer`} onClick={( )=>{ 
+                  SetShowUserBoxTools(false);
+                 }} />
             }
           </div> : null
         }

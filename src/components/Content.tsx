@@ -4,7 +4,7 @@ import PostForm from './PostForm'
 import '../Content.css'
 import { useSelector } from "react-redux"
 
-const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,backFromComments ,SetBackFromComments, commentParentID ,SetCommentParentID} :any) =>{
+const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts , SetViewUserPosts ,backFromComments ,SetBackFromComments, commentParentID ,SetCommentParentID , followed, SetFollowed} :any) =>{
 
     let [PostsView, SetPosts] = useState<any>([]);
     const postPrevListRef = useRef<any>(PostsView)
@@ -35,6 +35,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
         postPrevListRef.current = null;
         SetPage(0)
         SetPosts(null)
+        SetFollowed(false);
       }
       parentID ? SetInsidePost(true) : SetInsidePost(false);
       fetch(process.env.REACT_APP_API_ENDPOINT + "posts/fetch", {
@@ -50,13 +51,12 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
         if (response.ok) {
           const data = await response.json();
           if(data.success){ 
-            console.log(data.posts)
             postPrevListRef.current = postPrevListRef.current && PostsView.length > 0 ? [...postPrevListRef.current , ...data.posts] : data.posts;
             SetPosts(postPrevListRef.current);
             SetPage(indexPage + 6)
-
+            if(indexPage === 0) SetFollowed(data.followed)
+            SetCommentParentID(parentID)
           }
-          SetCommentParentID(parentID)
         }
         else{
           postPrevListRef.current = null;
@@ -147,7 +147,6 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
         if (response.ok) {
           const data = await response.json()  
           if(data.success){
-            console.log(data , contentID)
             let content : any = postPrevListRef.current.find((cont : any) => cont._id == contentID)
             const contentIndex = postPrevListRef.current.indexOf(content)
             if(contentIndex < 0) return;
@@ -170,7 +169,6 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
        
         if(!bottom) return;
        
-        console.log(bottom , page)
         getContent({username : viewUserPosts , parentID : commentParentID, indexPage : page})
       }
 
@@ -179,7 +177,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts ,b
             <div className={`contentContainer`} onScroll={handleContentScroll}>
             {PostsView != null && PostsView.length > 0 ?
               PostsView.map((data : any) => {
-                return <PostForm key={data._id} parentID={data.Parent_ID} contentID={data._id} prof={data.prof} title={data.Post_Title} mediaFolder={data.Post_MediaFolder} mediaFiles={data.Post_MediaFiles} mediaUrl={data.Post_MediaUrl} postText={data.Post_Text} sameUser={data.sameUser} postDate={data.Post_Date} commentsCount={data.commentsCount} postAgree={data.agreeAmount} postDisagree={data.disAgreeAmount} userInteracted={data.userInteracted} postViews={0} postEdited={data.Post_Edited} getContent={getContent} setUserOpinion={setUserOpinion} editContent={editContent} deleteContent={deleteContent} />
+                return <PostForm key={data._id} parentID={data.Parent_ID} contentID={data._id} prof={data.prof} title={data.Post_Title} mediaFolder={data.Post_MediaFolder} mediaFiles={data.Post_MediaFiles} mediaUrl={data.Post_MediaUrl} postText={data.Post_Text} sameUser={data.sameUser} postDate={data.Post_Date} commentsCount={data.commentsCount} postAgree={data.agreeAmount} postDisagree={data.disAgreeAmount} userInteracted={data.userInteracted} postViews={0} postEdited={data.Post_Edited} getContent={getContent} setUserOpinion={setUserOpinion} editContent={editContent} deleteContent={deleteContent} SetViewUserPosts={SetViewUserPosts} />
               })
               : PostsView && PostsView.length === 0 ?
               <div className={`baseLayer loadingContent`}>{insidePost ? `No comments yet` : viewUserPosts ? `${viewUserPosts} doesn't have any posts yet` :`Follow people to have posts appear`}</div> 

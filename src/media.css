@@ -69,5 +69,5 @@
     display: flex;
     align-items: center;
     font-size: 22px;
-    margin-left: 14px;
+    gap: 14px;
 }

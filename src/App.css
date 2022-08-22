@@ -41,6 +41,9 @@ cursor: pointer;
   background-color: #0b8dff !important;
   color: white;
 }
+.selectedButton:hover{
+  background-color: #026fcf !important;
+}
 .baseLayer{
   background-color: #f0f0f0;
 }

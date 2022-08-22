@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import '../Community.css'
-const Search = ({viewUserPosts,SetViewUserPosts , SetBackFromComments} : any)=>{
+const Search = ({followed, SetFollowed, viewUserPosts,SetViewUserPosts , SetBackFromComments} : any)=>{
 
     const [categoryList,SetCategoryList] = useState<any>(null)
     const [categorySearch,SetCategorySearch] = useState('')
     let { user } = useSelector((state: any) => state.user)
-    
+
+
     useEffect(()=>{
         SetCategorySearch('');
     },[viewUserPosts])
@@ -36,13 +37,46 @@ const Search = ({viewUserPosts,SetViewUserPosts , SetBackFromComments} : any)=>{
           }
         })
       }
+      function FollowUsers(follow : boolean){
+        fetch(process.env.REACT_APP_API_ENDPOINT + "users/follow", {
+          method: "POST",
+          credentials: "include",
+          // Pass authentication token as bearer token in header
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({follow , name : viewUserPosts})
+        }).then(async response => {
+          if (response.ok) {
+            const data = await response.json()  
+            if(data.success){
+                SetFollowed(data.followed)
+            }
+          }
+        })
+      }
     return (
         <div className={`search`}>
             {
                 viewUserPosts ? <>
-                    <span className={`bi bi-arrow-left secondLayer`} onClick={()=>{ SetViewUserPosts(null);SetBackFromComments(true) }}>Back</span> 
+                <div className="secondLayer searchButtons" onClick={()=>{
+                    SetViewUserPosts(null);
+                    SetBackFromComments(true) 
+                  }}>
+                    <span className={`bi bi-arrow-left`} ></span>
+                    <span>{`Back`}</span>
+                  </div>
                  <div className="mainTitle">
                   {viewUserPosts ? viewUserPosts : `Followed Feed`}
+                  {
+                    viewUserPosts ? 
+                    <div className="secondLayer searchButtons" onClick={()=>{ FollowUsers(followed)  }}>
+                    <span className={`bi bi-eye${followed ? '-slash' : ""}-fill`} ></span>
+                    <span>{ followed ? 'UNFOLLOW' : 'FOLLOW'}</span>
+                  </div>
+                    : null
+                  }
                 </div>
                 </> 
                 : <input type="text" placeholder="Search for user..." maxLength={150} onChange={handleSearch} autoComplete="off"/>

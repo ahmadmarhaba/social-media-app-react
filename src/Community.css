@@ -24,10 +24,6 @@
     cursor: pointer;
     font-size: 20px;
   }
-  .search{
-    display: flex;
-    position: relative;
-  }
   .suggest{
     margin-bottom: 20px;
   }
@@ -39,15 +35,18 @@
     margin: 0;
     font-size: 22px;
   }
-  .search {
-    border-radius: 5px;
+  .search{
+    display: flex;
+    position: relative;
+    gap: 14px;
   }
-  .search span{
-    padding: 6px 16px;
+
+  .searchButtons{
+    display: flex;
     font-size: 22px;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
-  }
-  .search span::before{
-    margin-right: 10px;
   }

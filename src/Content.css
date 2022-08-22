@@ -63,7 +63,9 @@
       margin-top: 6px;
     }
     .userProfileTitle span{
-      font-size: 16px;
+      font-size: 14px;
+      font-style: italic;
+      color: #000000b0;
     }
     .userProfilePic {
       height: 42px;
@@ -89,6 +91,10 @@
     }
     .userProfileName {
       font-size: 16px;
+      cursor: pointer;
+    }
+    .userProfileName:hover{
+      text-decoration: underline;
     }
     
    .userDateTime {

@@ -147,8 +147,8 @@ export default function CreateContent({  sort , SetSort, insidePost , commentPar
             />
             <input type="button" value="Save" className={`selectedButton`}
               onClick={() => {
-                const title = (ContentTitleRef.current as any).value;
-                const text = (ContentTextRef.current as any).value;
+                const title = (ContentTitleRef.current as any)?.value;
+                const text = (ContentTextRef.current as any)?.value;
                 createContent({contentID : commentParentID , title , text})
               }} />
                 </div>
