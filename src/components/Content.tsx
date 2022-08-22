@@ -16,17 +16,20 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts , 
 
     useEffect(()=>{
         getContent({username : viewUserPosts , parentID : commentParentID, indexPage:0})
+        // eslint-disable-next-line 
     },[sort])
     useEffect(()=>{
       if(viewUserPosts){
         getContent({username : viewUserPosts , parentID : commentParentID, indexPage:0})
       }
+      // eslint-disable-next-line 
     },[viewUserPosts])
     useEffect(()=>{
       if(backFromComments){
         SetBackFromComments(false)
         getContent({username : viewUserPosts , parentID : null , indexPage:0})
       }
+      // eslint-disable-next-line 
     },[backFromComments])
 
 
@@ -81,7 +84,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts , 
         if (response.ok) {
           const data = await response.json() 
           if(data.success){
-              let content : any = postPrevListRef.current.find((cont : any) => cont._id == data.Content_ID)
+              let content : any = postPrevListRef.current.find((cont : any) => cont._id === data.Content_ID)
               const contentIndex = postPrevListRef.current.indexOf(content)
              if(contentIndex < 0) return;
               content.userInteracted = data.opinion;
@@ -115,7 +118,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts , 
         if (response.ok) {
           const data = await response.json()  
           if(data.success){
-            let content : any = postPrevListRef.current.find((cont : any) => cont._id == contentID)
+            let content : any = postPrevListRef.current.find((cont : any) => cont._id === contentID)
             const contentIndex = postPrevListRef.current.indexOf(content)
             if(contentIndex < 0) return;
             content.Post_Text = text;
@@ -147,7 +150,7 @@ const Content = ({ sort , SetSort ,insidePost , SetInsidePost , viewUserPosts , 
         if (response.ok) {
           const data = await response.json()  
           if(data.success){
-            let content : any = postPrevListRef.current.find((cont : any) => cont._id == contentID)
+            let content : any = postPrevListRef.current.find((cont : any) => cont._id === contentID)
             const contentIndex = postPrevListRef.current.indexOf(content)
             if(contentIndex < 0) return;
             SetPosts((oldArray : any) => {

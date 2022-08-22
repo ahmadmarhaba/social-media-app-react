@@ -45,6 +45,7 @@ const Welcome = () => {
         }
       }
     })
+    // eslint-disable-next-line
   }, [dispatch, user.token])
 
   useEffect(() => {

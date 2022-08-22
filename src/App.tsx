@@ -35,6 +35,7 @@ function App() {
       // call refreshToken every 5 minutes to renew the authentication token.
       setTimeout(verifyUser, 5 * 60 * 1000)
     })
+    // eslint-disable-next-line
   }, [dispatch])
 
   useEffect(() => {

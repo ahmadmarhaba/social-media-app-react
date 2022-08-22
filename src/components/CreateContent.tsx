@@ -1,5 +1,5 @@
 import '../Post.css'
-import { useState,useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 // import {InsertYoutubeUrl , checkAcceptedExtensions} from './PostData';
 // import axios from 'axios';

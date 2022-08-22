@@ -34,7 +34,7 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
           <div className={`userDateTime`}>{moment(new Date(Number(postDate))).local().format('MMMM Do YYYY, hh:mm a')}</div>
         </div>
         {
-          title != null && title != '' && !parentID &&
+          title !== null && title !== '' && !parentID &&
              <div className={`userProfileTitle`}>
               {title}
              <span> {postEdited ? '(Edited)' : ''}</span>
@@ -173,21 +173,21 @@ const PostForm = ({ parentID,contentID, prof, title, mediaFolder, mediaFiles, me
         </div> : null}
       </div>
     )
-    function ShowCommentsFunc(socket: any, id: number, onlyView: boolean, itsReply: boolean) {
-      // if (!OnlyView) {
-      //   //show createcomment textarea
-      //   ShowCreateComment(true)
-      // }else{
-      //   ShowCreateComment(false)
-      // }
+    // function ShowCommentsFunc(socket: any, id: number, onlyView: boolean, itsReply: boolean) {
+    //   // if (!OnlyView) {
+    //   //   //show createcomment textarea
+    //   //   ShowCreateComment(true)
+    //   // }else{
+    //   //   ShowCreateComment(false)
+    //   // }
   
-      socket.emit('getTopComments', {
-        contentID: id,
-        page : 1,
-        itsComment: !itsReply
-      })
-      //socket.emit('getProfileSpecificContent', data)
-    }
+    //   socket.emit('getTopComments', {
+    //     contentID: id,
+    //     page : 1,
+    //     itsComment: !itsReply
+    //   })
+    //   //socket.emit('getProfileSpecificContent', data)
+    // }
   
   }
   
