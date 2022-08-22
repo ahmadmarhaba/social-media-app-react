@@ -6,7 +6,7 @@ import { fetchUser } from "../store/actions/userAction"
 const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
-  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const dispatch : any = useDispatch();
   let { user } = useSelector((state: any) => state.user)
@@ -22,7 +22,7 @@ const Login = () => {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username , password }),
+      body: JSON.stringify({ username : email , password }),
     })
       .then(async response => {
         setIsSubmitting(false)
@@ -50,10 +50,10 @@ const Login = () => {
     {error && <div className="auth-error">{error}</div>}
       <form  onSubmit={formSubmitHandler}  className="auth-form">
           <input
-            placeholder="Username"
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <input
             placeholder="Password"

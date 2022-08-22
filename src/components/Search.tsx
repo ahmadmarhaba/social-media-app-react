@@ -68,15 +68,14 @@ const Search = ({followed, SetFollowed, viewUserPosts,SetViewUserPosts , SetBack
                     <span>{`Back`}</span>
                   </div>
                  <div className="mainTitle">
-                  {viewUserPosts ? viewUserPosts : `Followed Feed`}
                   {
-                    viewUserPosts ? 
-                    <div className="secondLayer searchButtons" onClick={()=>{ FollowUsers(followed)  }}>
-                    <span className={`bi bi-eye${followed ? '-slash' : ""}-fill`} ></span>
-                    <span>{ followed ? 'UNFOLLOW' : 'FOLLOW'}</span>
+                  !viewUserPosts ? `Followed Feed` 
+                  : <div className="secondLayer searchButtons" onClick={()=>{ FollowUsers(followed)  }}>
+                    <span>{ viewUserPosts }</span>
+                    <span className={`bi bi-eye${followed ? '-slash' : ""}`} ></span>
                   </div>
-                    : null
                   }
+
                 </div>
                 </> 
                 : <input type="text" placeholder="Search for user..." maxLength={150} onChange={handleSearch} autoComplete="off"/>
