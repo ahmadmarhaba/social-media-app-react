@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/social-media-app-react/static/css/main.3ac12067.css",
-    "main.js": "/social-media-app-react/static/js/main.c9691f36.js",
+    "main.js": "/social-media-app-react/static/js/main.18bc8f29.js",
     "static/js/787.3efc852b.chunk.js": "/social-media-app-react/static/js/787.3efc852b.chunk.js",
     "static/media/bootstrap-icons.woff?": "/social-media-app-react/static/media/bootstrap-icons.e559bf06bc84fd9525e6.woff",
     "static/media/bootstrap-icons.woff2?": "/social-media-app-react/static/media/bootstrap-icons.ea98e12d2d58747f9fc5.woff2",
     "index.html": "/social-media-app-react/index.html",
     "main.3ac12067.css.map": "/social-media-app-react/static/css/main.3ac12067.css.map",
-    "main.c9691f36.js.map": "/social-media-app-react/static/js/main.c9691f36.js.map",
+    "main.18bc8f29.js.map": "/social-media-app-react/static/js/main.18bc8f29.js.map",
     "787.3efc852b.chunk.js.map": "/social-media-app-react/static/js/787.3efc852b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3ac12067.css",
-    "static/js/main.c9691f36.js"
+    "static/js/main.18bc8f29.js"
   ]
 }
